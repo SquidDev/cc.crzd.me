@@ -54,17 +54,22 @@
                 <p>
                     Whilst they are built from ComputerCraft's source, these are not "official" builds of ComputerCraft. For that, you should
                     see <a href="https://minecraft.curseforge.com/projects/computercraft">ComputerCraft's CurseForge page</a>.
-                </div>
+                </p>
             </div>
             <h2><span>All builds</span></h2>
-            <div class="downloads">
+            <div class="search-box">
+                <label for="search-box" class="search-hint"><span class="fa fa-search" aria-hidden="true"></span></label>
+                <input id="search-box" type="text" placeholder="Search builds" onchange="filter_builds(this.value)" oninput="filter_builds(this.value)" />
+            </div>
+
+            <div class="downloads" id="download-list">
                 {{#all}}
                     <div class="download">
                         <h3>
                             <a href="{{html-url}}{{file}}">
                                 <span class="fa fa-download" aria-hidden="true"></span>
                                 <span class="aria-hint">Download</span>
-                                {{desc}}
+                                <span data-tag="desc">{{desc}}</span>
                                 <span class="version-major">{{main_version}}</span><span class="version-build">build{{version}}</span>
                             </a>
                         </h3>
@@ -82,10 +87,10 @@
                                 <ul class="commits">
                                     {{#refs}}
                                         <li>
-                                            <span class="commit-branch">{{name}}</span>
+                                            <span class="commit-branch" data-tag="branch-name">{{name}}</span>
                                             <a href="https://github.com/dan200/ComputerCraft/commit/{{sha}}">
                                                 <span class="commit-sha">{{sha_short}}</span>
-                                                <span class="commit-message" title="{{msg}}">{{msg}}</span>
+                                                <span class="commit-message" title="{{msg}}" data-tag="branch-sha">{{msg}}</span>
                                             </a>
                                         </li>
                                     {{/refs}}
@@ -96,6 +101,30 @@
                 {{/all}}
             </div>
         </div>
+        <script type="text/javascript">
+            function filter_builds(filter) {
+                var downloads = document.getElementById("download-list").getElementsByClassName("download");
+                for(var i = downloads.length - 1; i >= 0; i--) {
+                    var download = downloads[i];
+                    var tags = download.querySelectorAll("[data-tag]");
+                    var found = false;
+                    for(var j = tags.length - 1; j >= 0; j--) {
+                        if(tags[j].innerText.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if(found) {
+                        download.hidden = true;
+                        download.style.display = "initial";
+                    } else {
+                        download.hidden = false;
+                        download.style.display = "none";
+                    }
+                }
+            }
+        </script>
         <footer>
             c^3i hosted by CrazedProgrammer and developed by SquidDev
         </footer>

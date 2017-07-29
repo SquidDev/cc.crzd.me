@@ -189,3 +189,31 @@ h2 {
         }
     }
 }
+
+// Search
+.search-box {
+    margin: 15px;
+    position: relative;
+
+    $height: 45px;
+
+    input {
+        width: 100%;
+        height: $height;
+        font-size: 1.3em;
+        padding-left: 30px;
+        box-sizing: border-box;
+    }
+
+    .search-hint {
+        position: absolute;
+        font-size: 1.3em;
+        top: 0px;
+        left: 7px;
+        width: 16px;
+        height: $height;
+        line-height: $height;
+        text-align: center;
+        pointer-events: none;
+    }
+}
