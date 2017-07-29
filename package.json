@@ -7,7 +7,7 @@
       "start": "http-server dist -c-1",
       "dist": "node-sass --output-style compressed styles/main.scss > dist/main.css",
       "watch-sass": "node-sass --watch --recursive --output dist --source-map true --source-map-contents styles",
-      "watch-template": "while pystache template/main.mustache template/data.json > dist/index.html; inotifywait -e close_write template/*.mustache; do continue done"
+      "watch-template": "while pystache template/main.mustache template/data.json > dist/index.html; inotifywait -e close_write template/*.mustache; do continue; done"
   },
   "repository": {
     "type": "git",

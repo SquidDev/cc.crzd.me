@@ -1,0 +1,30 @@
+{
+    "cache": "c3i-cache.json",
+    "main_branch": "origin/master",
+    "path": "ComputerCraft",
+
+    "additional": [],
+    "recommended": [
+        {
+            "name": "default",
+            "desc": "ComputerCraft",
+            "extra_desc": "for Minecraft 1.9.4/1.10.2"
+        },
+        {
+            "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.11.2",
+            "desc": "ComputerCraft",
+            "extra_desc": "for Minecraft 1.11.2"
+        },
+        {
+            "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.12.2",
+            "desc": "ComputerCraft",
+            "extra_desc": "for Minecraft 1.12"
+        }
+    ],
+
+    "overrides": [],
+
+    "output": "out",
+    "html-out": "dist/index.html",
+    "html-url": "out/"
+}

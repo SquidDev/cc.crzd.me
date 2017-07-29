@@ -21,25 +21,12 @@ $tone07: #BB8FCE;
 $tone08: #D2B4DE;
 $tone09: #E8DAEF;
 
+$header-height: 50px;
+
 @mixin link($normal, $hover) {
     a {
         &, &:visited, &:active { color: $normal; }
         &:hover { color: $hover; }
-    }
-}
-
-@mixin middle {
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-
-    > * {
-        display: block;
-        position: relative;
-        top: 50%;
-        -webkit-transform: perspective(1px) translateY(-50%);
-        -ms-transform: perspective(1px) translateY(-50%);
-        transform: perspective(1px) translateY(-50%);
     }
 }
 
@@ -51,7 +38,7 @@ body {
 // Header
 header {
     width: 100%;
-    height: 50px;
+    height: $header-height;
     background-color: $tone05;
     color: $grey09;
 
@@ -62,11 +49,11 @@ header {
         a {
             display: inline-block;
             height: 100%;
+            line-height: $header-height;
             padding: 0px 10px;
             box-sizing: border-box;
             color: #FFF;
-
-            @include middle;
+            vertical-align: middle;
 
             &:hover {
                 color: $grey09;

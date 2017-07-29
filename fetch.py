@@ -139,9 +139,7 @@ def get_commit(repo, sha):
             out[field.strip()] = data.strip()
     return out
 
-def build_version(configuration, additional):
-    name = additional['name']
-
+def build_version(configuration, name, *additional):
     if name == "default":
         full_name = 'ComputerCraft'
     else:
@@ -149,9 +147,9 @@ def build_version(configuration, additional):
     full_version = '%s-build%d' % (configuration['main_version'], configuration['version'])
 
     out = []
-    for (name, ref) in configuration['refs'].items():
+    for (branch, ref) in configuration['refs'].items():
         out.append({
-            'name': name,
+            'name': branch,
             'sha': ref,
             'sha_short': ref[0:8],
             'msg': get_commit(config['path'], ref)['Message'][0],
@@ -160,13 +158,18 @@ def build_version(configuration, additional):
     # TODO: Sort so origin/master is on the top
     out.sort(key = lambda x: x['name'])
 
-    return {
+    out = {
         **configuration,
-        **additional,
-
         'file': os.path.join('dan200', 'computercraft', full_name, full_version, "%s-%s.jar" % (full_name, full_version)),
         'refs': out,
     }
+
+    for overrides in additional:
+        for entry in overrides:
+            if entry['name'] == name:
+                out.update(entry)
+
+    return out
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="A CI script for ComputerCraft, building specified configurations")
@@ -185,6 +188,8 @@ if __name__ == "__main__":
     parser.add_argument('--config',
                         help='the config file to use',
                         default='c3i.'+extension)
+    parser.add_argument('--dump', metavar='PATH',
+                        help='dump the resulting data to a JSON file')
 
     args = parser.parse_args()
 
@@ -192,7 +197,10 @@ if __name__ == "__main__":
     config = load_config(args.config)
 
     # Setup our templating system
-    renderer = pystache.Renderer(search_dirs = [os.path.abspath("templates")])
+    renderer = pystache.Renderer(search_dirs = [os.path.abspath("template")])
+
+    # Setup the file to dump to
+    dump = os.path.abspath(args.dump) if args.dump != None else None
 
     # Fetch the existing PRs
     prs = [] if args.no_prs else get_prs()
@@ -219,11 +227,6 @@ if __name__ == "__main__":
                                 'branches': [pr['name'] + '/' + pr['branch'] ]})
     if 'additional' in config:
         configurations.extend(config['additional'])
-
-    if 'overrides' in config:
-        for item in configurations:
-            if item['name'] in config['overrides']:
-                item.update(config['overrides'][item['name']])
 
     # Gather a set of branches we're interested in
     branches = {"origin/master"}
@@ -338,19 +341,23 @@ if __name__ == "__main__":
     with open(config['cache'], 'w') as file:
         json.dump({ 'refs': new_refs, 'configurations': configuration_cache }, file)
 
+    result = {
+        **config,
+        'recommended': [ build_version(configuration_cache[c['name']], c['name'], configurations, config['overrides'], config['recommended'])
+                         for c in config['recommended']
+                         if c['name'] in configuration_cache ],
+        'all':         [ build_version(configuration_cache[c['name']], c['name'], configurations, config['overrides'])
+                         for c in configurations
+                         if c['name'] in configuration_cache ],
+    }
+
+    # Write a JSON dump
+    if dump != None:
+        log("Writing JSON")
+        with open(dump, "w") as file:
+            json.dump(result, file)
 
     # Write a HTML download page.
     log("Writing HTML")
     with open(config['html-out'], 'w') as file:
-        x = {
-            **config,
-            'recommended': [ build_version(configuration_cache[c['name']], c) for c in configurations
-                             if c['name'] in configuration_cache and c['name'] in config['recommended'] ],
-            'all':         [ build_version(configuration_cache[c['name']], c) for c in configurations
-                             if c['name'] in configuration_cache ],
-            }
-
-        with open("templates/data.json", "w") as file:
-            json.dump(x, file)
-
-        file.write(renderer.render_name("main", x))
+        file.write(renderer.render_name("main", result))
