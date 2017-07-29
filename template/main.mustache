@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>ComputerCraft CI Server</title>
+        <link rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    </head>
+    <body>
+        <header>
+            <div class="pull-left button-group">
+                <a href="/">
+                    <h1>ComputerCraft CI Server</h1>
+                </a>
+            </div>
+
+            <div class="pull-right button-group hide-tiny">
+                <a href="https://minecraft.curseforge.com/projects/computercraft" title="View on Curse">
+                    <span>
+                        <span class="fa fa-fire" aria-hidden="true"></span>
+                        Curse
+                    </span>
+                </a>
+                <a href="https://github.com/dan200/ComputerCraft" title="View on GitHub">
+                    <span>
+                        <span class="fa fa-github" aria-hidden="true"></span>
+                        GitHub
+                    </span>
+                </a>
+            </div>
+        </header>
+
+        <div id="content">
+            <div class="jumbotron">
+                <div class="primary-downloads">
+                    {{#recommended}}
+                        <div class="download">
+                            <h3>
+                                <a href="{{html-url}}{{file}}">
+                                    <span class="fa fa-download" aria-hidden="true"></span>
+                                    <span class="aria-hint">Download</span>
+                                    {{desc}}
+                                    <span class="version-major">{{main_version}}</span><span class="version-build">build{{version}}</span>
+                                    {{extra_desc}}
+                                </a>
+                            </h3>
+                        </div>
+                    {{/recommended}}
+                </div>
+                <p>
+                    These downloads are built from the latest version of the <a href="https://github.com/dan200/ComputerCraft">ComputerCraft
+                    source code</a>. Please note they are experiemental, and so you should <strong>always</strong> back up your world before
+                    using them.
+                </p>
+                <p>
+                    Whilst they are built from ComputerCraft's source, these are not "official" builds of ComputerCraft. For that, you should
+                    see <a href="https://minecraft.curseforge.com/projects/computercraft">ComputerCraft's CurseForge page</a>.
+                </div>
+            </div>
+            <h2><span>All builds</span></h2>
+            <div class="downloads">
+                {{#all}}
+                    <div class="download">
+                        <h3>
+                            <a href="{{html-url}}{{file}}">
+                                <span class="fa fa-download" aria-hidden="true"></span>
+                                <span class="aria-hint">Download</span>
+                                {{desc}}
+                                <span class="version-major">{{main_version}}</span><span class="version-build">build{{version}}</span>
+                            </a>
+                        </h3>
+                        <ul class="fa-ul">
+                            {{#pr}}
+                                <li>
+                                   <span class="fa fa-li fa-file-code-o" aria-hidden="true"></span>
+                                    <a href="{{pr}}">See original PR</a>
+                                </li>
+                            {{/pr}}
+
+                            <li>
+                                <span class="fa fa-li fa-code-fork" aria-hidden="true"></span>
+                                Branches used:
+                                <ul class="commits">
+                                    {{#refs}}
+                                        <li>
+                                            <span class="commit-branch">{{name}}</span>
+                                            <a href="https://github.com/dan200/ComputerCraft/commit/{{sha}}">
+                                                <span class="commit-sha">{{sha_short}}</span>
+                                                <span class="commit-message" title="{{msg}}">{{msg}}</span>
+                                            </a>
+                                        </li>
+                                    {{/refs}}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                {{/all}}
+            </div>
+        </div>
+        <footer>
+            c^3i hosted by CrazedProgrammer and developed by SquidDev
+        </footer>
+    </body>
+</html>

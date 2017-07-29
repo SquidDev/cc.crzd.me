@@ -1,0 +1,26 @@
+{
+  "name": "c3i",
+  "version": "1.0.0",
+  "description": "ComputerCraft CI server",
+  "main": "index.js",
+  "scripts": {
+      "start": "http-server dist -c-1",
+      "dist": "node-sass --output-style compressed styles/main.scss > dist/main.css",
+      "watch-sass": "node-sass --watch --recursive --output dist --source-map true --source-map-contents styles",
+      "watch-template": "while pystache template/main.mustache template/data.json > dist/index.html; inotifywait -e close_write template/*.mustache; do continue done"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SquidDev/c3i.git"
+  },
+  "author": "SquidDev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SquidDev/c3i/issues"
+  },
+  "homepage": "https://github.com/SquidDev/c3i#readme",
+  "devDependencies": {
+    "http-server": "^0.10.0",
+    "node-sass": "^4.5.3"
+  }
+}

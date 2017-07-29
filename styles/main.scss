@@ -1,0 +1,204 @@
+@import "reset.scss";
+
+$grey00: #151515;
+$grey01: #202020;
+$grey02: #505050;
+$grey03: #707070;
+$grey04: #B0B0B0;
+$grey05: #D0D0D0;
+$grey06: #E0E0E0;
+$grey07: #ECF0F1;
+$grey08: #FAFAFA;
+$grey09: #FFFFFF;
+
+$tone01: #4A235A;
+$tone02: #5B2C6F;
+$tone03: #6C3483;
+$tone04: #7D3C98;
+$tone05: #8E44AD;
+$tone06: #A569BD;
+$tone07: #BB8FCE;
+$tone08: #D2B4DE;
+$tone09: #E8DAEF;
+
+@mixin link($normal, $hover) {
+    a {
+        &, &:visited, &:active { color: $normal; }
+        &:hover { color: $hover; }
+    }
+}
+
+@mixin middle {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    > * {
+        display: block;
+        position: relative;
+        top: 50%;
+        -webkit-transform: perspective(1px) translateY(-50%);
+        -ms-transform: perspective(1px) translateY(-50%);
+        transform: perspective(1px) translateY(-50%);
+    }
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans",
+    "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+// Header
+header {
+    width: 100%;
+    height: 50px;
+    background-color: $tone05;
+    color: $grey09;
+
+    h1 { font-size: 1.5em; }
+
+    .button-group {
+        height: 100%;
+        a {
+            display: inline-block;
+            height: 100%;
+            padding: 0px 10px;
+            box-sizing: border-box;
+            color: #FFF;
+
+            @include middle;
+
+            &:hover {
+                color: $grey09;
+                background-color: $tone01;
+            }
+        }
+    }
+}
+
+// Footer
+footer {
+    font-size: 0.7em;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    background-color: $grey02;
+    color: $grey09;
+}
+
+/* General */
+#content {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    max-width: 1500px;
+    margin: 0px auto;
+}
+
+a { text-decoration: none; }
+
+.aria-hint { display: none; }
+.jumbotron { min-height: 70vh; }
+
+p {
+    max-width: 800px;
+    text-align: center;
+    margin: 15px auto;
+}
+
+// Heading styles
+h2 {
+    display: block;
+    font-size: 2em;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 10px 0px;
+
+    > span {
+        position: relative;
+        display: inline-block;
+        padding: 10px;
+        border: 1px solid $grey03;
+
+        &:before, &:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 10000px;
+            height: 1px;
+            background: $grey03;
+        }
+
+        &:before { right: 100%; }
+        &:after { left: 100%; }
+    }
+}
+
+// Downloads
+.downloads {
+    display: flex;
+    flex-flow: row wrap;
+
+    .download { flex-basis: 600px; }
+}
+
+.primary-downloads {
+    width: 100%;
+    margin-bottom: 50px;
+
+    .download {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.download {
+    max-width: 600px;
+    margin: 0px 15px 15px 15px;
+
+    h3 {
+        background-color: #8E44AD;
+        width: 100%;
+        border: none;
+        margin: 0px 0px 10px 0px;
+        box-sizing: border-box;
+        padding: 10px;
+
+        @include link(#FFF, $tone07);
+
+        .version-build { font-size: 0.5em; }
+    }
+
+    li { margin: 5px 0px; }
+
+    ul.commits {
+        list-style: disc inside;
+        padding-left: 15px;
+
+        li {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @include link(#888, #999);
+        a:hover, a:focus { text-decoration: underline; }
+
+        .commit-sha { font-size: 0.7em; font-family: "Consolas", "Courier New", monospace; }
+        .commit-branch { font-size: 0.8em; }
+        .commit-message { font-size: 0.6em; }
+    }
+}
+
+@media(max-width: 800px) {
+    .downloads {
+        flex-direction: column;
+        .download {
+            flex-basis: 100%;
+            max-width: 100%;
+            margin: 0px 0px 15px 0px;
+        }
+    }
+}
