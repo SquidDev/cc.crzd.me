@@ -61,6 +61,8 @@ header {
                 color: $grey09;
                 background-color: $tone01;
             }
+
+            &, &:hover, &:focus { text-decoration: none; }
         }
     }
 }
@@ -86,10 +88,13 @@ footer {
 }
 
 a { text-decoration: none; }
+a:hover, a:focus { text-decoration: underline; }
 @include link($tone03, $tone07);
 
 .aria-hint { display: none; }
 .jumbotron { min-height: 70vh; }
+.pull-left { float: left; }
+.pull-right { float: right; }
 
 p {
     max-width: 800px;
@@ -168,9 +173,11 @@ h2 {
             background-color: #8E44AD;
             width: 100%;
         }
+
+        a, a:hover, a:focus { text-decoration: none; }
     }
 
-    li { margin: 5px 0px; }
+    li { padding: 4px 0px; }
 
     ul.commits {
         list-style: disc inside;
@@ -183,7 +190,6 @@ h2 {
         }
 
         @include link(#888, #999);
-        a:hover, a:focus { text-decoration: underline; }
 
         .commit-sha { font-size: 0.7em; font-family: "Consolas", "Courier New", monospace; }
         .commit-branch { font-size: 0.8em; }
