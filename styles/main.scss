@@ -23,6 +23,8 @@ $tone09: #E8DAEF;
 
 $header-height: 50px;
 
+$download-width: 600px;
+
 @mixin link($normal, $hover) {
     a {
         &, &:visited, &:active { color: $normal; }
@@ -84,6 +86,7 @@ footer {
 }
 
 a { text-decoration: none; }
+@include link($tone03, $tone07);
 
 .aria-hint { display: none; }
 .jumbotron { min-height: 70vh; }
@@ -128,7 +131,7 @@ h2 {
     display: flex;
     flex-flow: row wrap;
 
-    .download { flex-basis: 600px; }
+    .download { flex-basis: $download-width; }
 }
 
 .primary-downloads {
@@ -138,24 +141,33 @@ h2 {
     .download {
         margin-left: auto;
         margin-right: auto;
+
+        h3 a {
+            padding: 15px;
+        }
     }
 }
 
 .download {
-    max-width: 600px;
+    max-width: $download-width;
     margin: 0px 15px 15px 15px;
 
     h3 {
-        background-color: #8E44AD;
         width: 100%;
         border: none;
         margin: 0px 0px 10px 0px;
         box-sizing: border-box;
-        padding: 10px;
 
         @include link(#FFF, $tone07);
 
         .version-build { font-size: 0.5em; }
+
+        a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #8E44AD;
+            width: 100%;
+        }
     }
 
     li { margin: 5px 0px; }
