@@ -1,6 +1,5 @@
 # c3i Related files
 /ComputerCraft
-/out
 /c3i-cache.json
 /c3i.json
 data.json
@@ -9,5 +8,4 @@ data.json
 /node_modules
 
 # Output
-/dist/*
-!/dist/main.css
+/dist
