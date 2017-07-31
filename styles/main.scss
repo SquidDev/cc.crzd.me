@@ -43,8 +43,9 @@ header {
     height: $header-height;
     background-color: $tone05;
     color: $grey09;
+    overflow: hidden;
 
-    h1 { font-size: 1.5em; }
+    h1 { font-size: 1.2em; }
 
     .button-group {
         height: 100%;
@@ -172,6 +173,7 @@ h2 {
             padding: 10px;
             background-color: #8E44AD;
             width: 100%;
+            box-sizing: border-box;
         }
 
         a, a:hover, a:focus { text-decoration: none; }

@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html>
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ComputerCraft CI Server</title>
         <link rel="stylesheet" href="main.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
@@ -9,7 +11,7 @@
         <header>
             <div class="pull-left button-group">
                 <a href="/">
-                    <h1>ComputerCraft CI Server</h1>
+                    <h1>ComputerCraft CI</h1>
                 </a>
             </div>
 
@@ -35,7 +37,7 @@
                     {{#recommended}}
                         <div class="download">
                             <h3>
-                                <a href="{{html-url}}{{file}}">
+                                <a href="{{html-url}}{{root_folder}}{{file}}">
                                     <span class="fa fa-download" aria-hidden="true"></span>
                                     <span class="aria-hint">Download</span>
                                     {{desc}}
@@ -66,7 +68,7 @@
                 {{#all}}
                     <div class="download">
                         <h3>
-                            <a href="{{html-url}}{{file}}">
+                            <a href="{{html-url}}{{root_folder}}{{file}}">
                                 <span class="fa fa-download" aria-hidden="true"></span>
                                 <span class="aria-hint">Download</span>
                                 <span data-tag="desc">{{desc}}</span>
@@ -77,9 +79,14 @@
                             {{#pr}}
                                 <li>
                                    <span class="fa fa-li fa-file-code-o" aria-hidden="true"></span>
-                                    <a href="{{pr}}">See original PR</a>
+                                    <a href="{{pr}}" title="See the original PR on GitHub">Original PR</a>
                                 </li>
                             {{/pr}}
+
+                            <li>
+                                <span class="fa fa-li fa-clock-o" aria-hidden="true"></span>
+                                <a href="{{html-url}}{{root_folder}}" title="View the file listing for all previous versions">Previous versions</a>
+                            </li>
 
                             <li>
                                 <span class="fa fa-li fa-code-fork" aria-hidden="true"></span>

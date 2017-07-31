@@ -160,7 +160,8 @@ def build_version(configuration, name, *additional):
 
     out = {
         **configuration,
-        'file': os.path.join('dan200', 'computercraft', full_name, full_version, "%s-%s.jar" % (full_name, full_version)),
+        'root_folder': 'dan200/computercraft/%s/' % (full_name),
+        'file': "%s/%s-%s.jar" % (full_version, full_name, full_version),
         'refs': out,
     }
 
