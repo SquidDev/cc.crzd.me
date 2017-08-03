@@ -72,7 +72,7 @@ def get_prs():
             else:
                 url = None
 
-    return out[::-1]
+    return out
 
 def init_repo(path, url):
     """Move into the given repo, cloning it if required"""
@@ -229,13 +229,13 @@ if __name__ == "__main__":
 
     # Gather a list of configurations we need to build
     configurations = [ { 'name': 'default', 'desc': 'ComputerCraft', 'branches': [] } ]
+    if 'additional' in config:
+        configurations.extend(config['additional'])
     for pr in prs:
         configurations.append({ 'name': pr['name'].replace('/', '-') + '-' + pr['branch'].replace('/', '-'),
                                 'desc': pr['desc'],
                                 'pr':   pr['link'],
                                 'branches': [pr['name'] + '/' + pr['branch'] ]})
-    if 'additional' in config:
-        configurations.extend(config['additional'])
 
     # Gather a set of branches we're interested in
     branches = {"origin/master"}
