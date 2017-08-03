@@ -21,10 +21,12 @@
             "extra_desc": "for Minecraft 1.12"
         }
     ],
-
     "overrides": [],
 
-    "output": "out",
+    "output": "dist/out",
     "html-out": "dist/index.html",
-    "html-url": "out/"
+    "html-url": "out/",
+    "html-resources": {
+        "main": "dist/main.css",
+    }
 }

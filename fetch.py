@@ -2,7 +2,7 @@
 
 """A simple CI script, pulling from the CC repo and building specific configurations"""
 
-import configparser, sys, os.path, argparse, subprocess, urllib.request, json, re, zipfile, string, pystache
+import configparser, sys, os.path, argparse, subprocess, urllib.request, json, re, zipfile, string, pystache, hashlib
 
 extension = 'json'
 import json as cfg
@@ -37,6 +37,8 @@ def load_config(name):
     config['cache'] = os.path.abspath(config['cache'])
     config['output'] = os.path.abspath(config['output'])
     config['html-out'] = os.path.abspath(config['html-out'])
+    config['html-resources'] = { name: os.path.abspath(path)
+                                 for (name, path) in config['html-resources'].items() }
 
     return config
 
@@ -171,6 +173,12 @@ def build_version(configuration, name, *additional):
                 out.update(entry)
 
     return out
+
+def hash_file(path):
+    hash = hashlib.sha256()
+    with open(path, "rb") as file:
+        hash.update(file.read())
+    return hash.hexdigest()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="A CI script for ComputerCraft, building specified configurations")
@@ -344,6 +352,8 @@ if __name__ == "__main__":
 
     result = {
         **config,
+        'html-resources': { name: hash_file(path)
+                            for (name, path) in config['html-resources'].items() },
         'recommended': [ build_version(configuration_cache[c['name']], c['name'], configurations, config['overrides'], config['recommended'])
                          for c in config['recommended']
                          if c['name'] in configuration_cache ],
