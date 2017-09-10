@@ -245,7 +245,7 @@ if __name__ == "__main__":
     # Update the remotes
     if not args.no_update:
         log("Fetching remotes")
-        subprocess.check_call(["git", "remote", "update", "--prune"])
+        subprocess.run(["git", "remote", "update", "--prune"])
 
     # Get a list of all new remotes
     new_refs = get_refs(config['path'], branches)

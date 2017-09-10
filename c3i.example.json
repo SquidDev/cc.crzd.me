@@ -3,15 +3,21 @@
     "main_branch": "origin/master",
     "path": "ComputerCraft",
 
-    "additional": [],
+    "additional": [
+        {
+            "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.9.4",
+            "desc": "Backport to 1.9.4",
+            "branches": ["SquidDev-CC/ComputerCraft/feature/minecraft-1.9.4"]
+        }
+    ],
     "recommended": [
         {
-            "name": "default",
+            "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.9.4",
             "desc": "ComputerCraft",
             "extra_desc": "for Minecraft 1.9.4/1.10.2"
         },
         {
-            "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.11.2",
+            "name": "default",
             "desc": "ComputerCraft",
             "extra_desc": "for Minecraft 1.11.2"
         },
@@ -27,6 +33,6 @@
     "html-out": "dist/index.html",
     "html-url": "out/",
     "html-resources": {
-        "main": "dist/main.css",
+        "main": "dist/main.css"
     }
 }
