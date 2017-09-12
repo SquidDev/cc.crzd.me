@@ -282,7 +282,9 @@ if __name__ == "__main__":
             subprocess.check_call(["./gradlew", "-q", "clean", "build"])
 
             # Setup various file names
-            file = next(os.scandir(os.path.join(config['path'], 'build', 'libs')))
+            files = os.scandir(os.path.join(config['path'], 'build', 'libs'))
+            file = next(file for file in files if "-sources.jar" not in file.path)
+
             main_version = file.name.replace('ComputerCraft', '').replace('.jar', '').strip('-')
 
             if name in configuration_cache and configuration_cache[name]['main_version'] == main_version:
