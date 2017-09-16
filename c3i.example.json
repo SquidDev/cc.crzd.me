@@ -8,6 +8,11 @@
             "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.9.4",
             "desc": "Backport to 1.9.4",
             "branches": ["SquidDev-CC/ComputerCraft/feature/minecraft-1.9.4"]
+        },
+        {
+            "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.11.2",
+            "desc": "Backport to 1.11.2",
+            "branches": ["SquidDev-CC/ComputerCraft/feature/minecraft-1.11.2"]
         }
     ],
     "recommended": [
@@ -15,6 +20,11 @@
             "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.9.4",
             "desc": "ComputerCraft",
             "extra_desc": "for Minecraft 1.9.4/1.10.2"
+        },
+        {
+            "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.11.2",
+            "desc": "ComputerCraft",
+            "extra_desc": "for Minecraft 1.11.2"
         },
         {
             "name": "default",
