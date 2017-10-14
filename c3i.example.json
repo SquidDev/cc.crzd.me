@@ -29,7 +29,7 @@
         {
             "name": "default",
             "desc": "ComputerCraft",
-            "extra_desc": "for Minecraft 1.12/1.12.1"
+            "extra_desc": "for Minecraft 1.12-1.12.2"
         }
     ],
     "overrides": [],
