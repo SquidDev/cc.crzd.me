@@ -63,8 +63,9 @@ def get_prs():
             out.extend({ 'branch': x['head']['ref'],
                          'desc': 'PR #%d: %s' % (x['number'], x['title']),
                          'link': x['html_url'],
-                         'repo': x['head']['repo']['clone_url'],
-                         'name': x['head']['repo']['full_name'] } for x in data)
+                         'repo': x['head']['repo']['clone_url'] if x['head']['repo'] else None,
+                         'name': x['head']['repo']['full_name'] if x['head']['repo'] else x['head']['user']['login'] + '/ComputerCraft'
+            } for x in data)
 
             if 'Link' in file.headers:
                 match = re.search(r'<([^>]+)>; rel="next"', file.headers['Link'])
@@ -91,7 +92,7 @@ def init_remotes(path, prs):
     config.read(os.path.join(path, ".git", "config"))
 
     remotes = {}
-    new_remotes = { pr['name']: pr['repo'] for pr in prs }
+    new_remotes = { pr['name']: pr['repo'] for pr in prs if pr['repo'] }
     for section in config.sections():
         match = re.fullmatch('remote "([^"]+)"', section)
         if match:
