@@ -86,13 +86,12 @@ def init_repo(path, url):
 
     os.chdir(path)
 
-def init_remotes(path, prs):
+def init_remotes(path, new_remotes):
     """Sync the remotes in the given repo with the open prs"""
     config = configparser.ConfigParser()
     config.read(os.path.join(path, ".git", "config"))
 
     remotes = {}
-    new_remotes = { pr['name']: pr['repo'] for pr in prs if pr['repo'] }
     for section in config.sections():
         match = re.fullmatch('remote "([^"]+)"', section)
         if match:
@@ -220,7 +219,11 @@ if __name__ == "__main__":
 
     # Setup the repo
     init_repo(config['path'], "https://github.com/dan200/ComputerCraft.git")
-    init_remotes(config['path'], prs)
+
+    remotes = { pr['name']: pr['repo'] for pr in prs if pr['repo'] }
+    if 'remotes' in config:
+        remotes.update(config['remotes'])
+    init_remotes(config['path'], remotes)
 
     # We reset anything we may have done before
     log("Cleaning the existing tree")

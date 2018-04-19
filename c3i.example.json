@@ -3,6 +3,10 @@
     "main_branch": "origin/master",
     "path": "ComputerCraft",
 
+    "remotes": {
+        "SquidDev-CC/ComputerCraft": "https://github.com/SquidDev-CC/ComputerCraft.git"
+    },
+
     "additional": [
         {
             "name": "SquidDev-CC-ComputerCraft-feature-minecraft-1.9.4",
